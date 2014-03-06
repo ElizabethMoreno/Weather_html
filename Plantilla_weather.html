@@ -1,4 +1,4 @@
-<html> xmlns = "http://www.w3.org/1999/xhtml" xml:lang = "es" charset = "utf-8">
+<html xmlns = "http://www.w3.org/1999/xhtml" sml:lang = "es" charset = "utf-8">
 	<head>
 		<tittle> El Tiempo</tittle>
 	</head>
@@ -8,11 +8,11 @@
 		{% for provincia in provincias %}
 		<h2>{{ provincias[contador] }}</h2>
 		<ul>
-			<li>Temperatura minima prevista:{{ temp_min[contador] }}C</li>
-			<li>Temperatura maxima prevista:{{ temp_max[contador] }}C</li>
-			<li>Velocidad viento:{{ vel_viento }}Km/h Direccion{{ direc_viento[contador] }}</li>
+			<li>Temperatura minima prevista: {{ temp_min[contador] }}C</li>
+			<li>Temperatura maxima prevista: {{ temp_max[contador] }}C</li>
+			<li>Velocidad viento: {{ vel_viento[contador] }}Km/h Direccion: {{ direc_viento[contador] }}</li>
 		</ul>
 		{% set contador = contador +1%}
-		{% set endfor %}
+		{%- endfor %}
 	</body>
 </html>

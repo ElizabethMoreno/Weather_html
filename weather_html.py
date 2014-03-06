@@ -23,9 +23,8 @@ def direccion_viento (direccion):
 		elif direccion >= 292.5 and direccion < 337.5:
 			return "NO"
 
-provincias = {"1":"Almeria","2":"Cadiz","3":"Cordoba","4":"Granada","5":"Huelva","6":"Jaen","7":"Malaga","8":"Sevilla"}
-provincia = provincias.keys()
-plantilla = open('Plantilla weather.html','r')
+provincias = ("Almeria","Cadiz","Cordoba","Granada","Huelva","Jaen","Malaga","Sevilla")
+plantilla = open('Plantilla_weather.html','r')
 resultado = open('resultado.html','w')
 html = ''
 
@@ -35,9 +34,9 @@ temp_maxima = []
 viento = []
 direccionviento = []
 
-for provincia in provincias:
-	respuesta = requests.get('http://api.openweathermap.org/data/2.5/weather',params = {'q': '%s,spain' %provincia})
-	ciudad.append(provincias[provincia])
+for i in provincias:
+	respuesta = requests.get('http://api.openweathermap.org/data/2.5/weather',params = {'q': '%s,spain' %i})
+	ciudad.append(i)
 	dicc = json.loads(respuesta.text)
 	temp_minima.append(int(dicc["main"]["temp_min"] - 273))
 	temp_maxima.append(int(dicc["main"]["temp_max"] - 273))
@@ -46,9 +45,9 @@ for provincia in provincias:
 
 for linea in plantilla:
 	html += linea
-print html
-miplantilla = Template(html)
-salida = miplantilla.render(provincias = 'provincia',temp_min = 'temp_minima',temp_max = 'temp_maxima',vel_viento = 'viento',direc_viento = 'direccionviento')
 
-resultado.write('miplantilla')
+miplantilla = Template(html)
+salida = miplantilla.render(provincias = ciudad,temp_min = temp_minima,temp_max = temp_maxima,vel_viento = viento,direc_viento = direccionviento)
+
+resultado.write(salida)
 webbrowser.open("resultado.html")
